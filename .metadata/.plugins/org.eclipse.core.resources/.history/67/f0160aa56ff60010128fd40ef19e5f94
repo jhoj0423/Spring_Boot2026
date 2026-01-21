@@ -1,0 +1,18 @@
+package com.green;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class MemberController {
+	
+	// 아래 작성 메소드 핸드러 메소드들이다
+	// 회원가입 양식
+	//http://localhost:8090/member/signup의 경로를 매핑(=연결)한다.
+	@GetMapping("member/signup")
+	public String signUpForm() {
+		System.out.println("signUpForm()");
+		return "signUpForm";// 응답에
+	}
+	
+}

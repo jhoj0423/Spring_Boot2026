@@ -1,0 +1,39 @@
+package com.green.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class BookController {
+	@GetMapping("/Book/rental")
+	public String bookrentalForm() {
+		System.out.println("book_rental()");
+		return "rental";
+	}
+	
+	@PostMapping("/Book/rentalproc")
+	public ModelAndView bookrentalProcForm(
+			@RequestParam String book_name, 
+			@RequestParam String auther, 
+			@RequestParam String isbn, 
+			@RequestParam String renter_name
+			) {
+		ModelAndView modelview = new ModelAndView();
+		
+		modelview.addObject("book_name", book_name);
+		modelview.addObject("auther", auther);
+		modelview.addObject("isbn", isbn);
+		modelview.addObject("renter_name", renter_name);
+		
+		modelview.setViewName("rentalproc");
+		System.out.println("rentalproc()");
+		
+		return modelview;
+		
+	}
+
+
+}

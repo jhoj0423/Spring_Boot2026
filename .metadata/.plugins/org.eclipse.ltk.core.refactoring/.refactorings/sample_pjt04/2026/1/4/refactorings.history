@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;sample_pjt04/src/main/resources/templates/orderResilt.html&apos; to &apos;orderResult.html&apos;" description="Rename resource &apos;orderResilt.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/orderResilt.html" name="orderResult.html" stamp="1768982878832" updateReferences="true"/>
+</session>

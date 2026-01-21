@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymloeof.org">
+<head>
+<meta charset="UTF-8">
+<title>SignUpForm</title>
+</head>
+<body>
+	<form action="">
+		<input type="text" name="id" palceholder ="id">
+		<input type="password" name="pw" palceholder ="pw">
+		<input type="email" name="email" palceholder ="email">
+		<input type="submit" value="SiGN-UP">
+	</form>
+</body>
+</html>

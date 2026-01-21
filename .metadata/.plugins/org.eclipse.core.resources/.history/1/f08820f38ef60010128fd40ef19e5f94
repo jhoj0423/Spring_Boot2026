@@ -1,0 +1,41 @@
+package com.green;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+@SpringBootApplication
+public class SamplePjt03Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SamplePjt03Application.class, args);
+	}
+
+	@GetMapping("/Book/rental")
+	public String bookrentalForm() {
+		System.out.println("book_rental()");
+		return "rental";
+	}
+	
+	@PostMapping("/Book/rentalproc")
+	public ModelAndView bookrentalProcForm(
+			@RequestParam String book_name, 
+			@RequestParam String auther, 
+			@RequestParam String isbn, 
+			@RequestParam String renter_name
+			) {
+		ModelAndView modelview = new ModelAndView();
+		
+		modelview.addObject("book_name", book_name);
+		modelview.addObject("auther", auther);
+		modelview.addObject("isbn", isbn);
+		modelview.addObject("renter_name", renter_name);
+		
+		return modelview;
+		
+	}
+}

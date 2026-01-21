@@ -1,0 +1,40 @@
+package com.green.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class ProductController {
+	
+	@GetMapping("/product/order")
+	public String order() {
+		System.out.println("order()");
+		return "order";
+		
+	}
+	
+	@PostMapping("/product/orderResult")
+	public String orderResult(
+			@RequestParam("productName") String productName,
+			@RequestParam("price") String price,
+			@RequestParam("quantity") String quantity,
+			@RequestParam("ordererName") String ordererName,
+			Model model
+			) {
+		model.addAttribute("productName",productName);
+		model.addAttribute("price",Integer.parseInt(price));
+		model.addAttribute("quantity",Integer.parseInt(quantity));
+		model.addAttribute("ordererName",ordererName);
+		int num1=Integer.parseInt(price);
+		int num2=Integer.parseInt(quantity);
+		int num3 = num1*num2;
+		model.addAttribute("totalPrice",num3);
+		
+		System.out.println("orderResult()");
+		
+		return "orderResult";
+	}
+}

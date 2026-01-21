@@ -1,0 +1,47 @@
+package com.green.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class BookController {
+	@GetMapping("/book/rental")
+	public String bookrentalForm() {
+		System.out.println("book_rental()");
+		return "rental";
+	}
+	
+	@PostMapping("/book/rentalProc")
+	public ModelAndView bookrentalProcForm(
+			@RequestParam("book_name") String book_name, 
+			@RequestParam("auther") String auther, 
+			@RequestParam("isbn") String isbn, 
+			@RequestParam("renter_name") String renter_name
+			) {
+		ModelAndView modelview = new ModelAndView();
+		
+//		modelview.addObject("book_name", book_name);
+//		modelview.addObject("auther", auther);
+//		modelview.addObject("isbn", isbn);
+//		modelview.addObject("renter_name", renter_name);
+		
+		modelview.addAllObjects("book_name",List.of("가방","오징어","사람","촛불","장승"));
+		modelview.addAllObjects("auther",List.of("리코더","플룻","기타","드럼","트럼펫"));
+		modelview.addAllObjects("isbn",List.of("두더지","다람쥐","땅강아지","비버","족제비"));
+		modelview.addAllObjects("renter_name",List.of("도마뱀","토끼","고양이","말","원숭이"));
+		
+		
+		modelview.setViewName("rentalProc");
+		System.out.println("rentalProc()");
+		
+		return modelview;
+		
+	}
+
+
+}

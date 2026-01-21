@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang ="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>예매 입력</h2>
+	<form th:action="@{/movie/reserve}">
+		<input type="text" placeholder="영화제목 입력" name="movieTitle"></input>	
+		<input type="text" placeholder="관람날짜 입력" name="reserveDate"></input>	
+		<input type="text" placeholder="관람시간 입력" name="reserveTime"></input>	
+		<input type="text" placeholder="인원 입력" name="people"></input>	
+		<input type="text" placeholder="예매자 입력" name="reserverName"></input>	
+	</form>
+</body>
+</html>

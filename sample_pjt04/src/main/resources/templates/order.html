@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang ="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>주문 입력</h2>
+	<form th:action="@{/product/orderResult}" method="POST">
+		<input type="text" name="productName" placeholder="상품명"></input><br>
+		<input type="text" name="price" placeholder="단가"></input><br>
+		<input type="text" name="quantity" placeholder="수량"></input><br>
+		<input type="text" name="ordererName" placeholder="주문자"></input> <br>
+		<input type="submit" placeholder="입력">
+	</form>
+</body>
+</html>
