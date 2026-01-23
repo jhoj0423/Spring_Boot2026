@@ -27,6 +27,11 @@ public class MemberDAO {
 	public MemberDTO getMemberDB(MemberDTO mdto) {
 		return memberDB.get(mdto.getId());
 	}
+	
+
+	public Map<String, MemberDTO> getMemberDBAll() {
+		return memberDB;
+	}
 
 	public void setMemberDB(Map<String, MemberDTO> memberDB) {
 		this.memberDB = memberDB;

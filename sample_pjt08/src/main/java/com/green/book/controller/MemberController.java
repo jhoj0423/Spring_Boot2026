@@ -36,7 +36,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/book/signin")
-	public String loginForm(MemberDTO mdto) {
+	public String loginForm(MemberDTO mdto, Model model) {
 		System.out.println("loginForm()");
 		memberservice.signupconfirm(mdto);
 		
@@ -45,7 +45,9 @@ public class MemberController {
 		System.out.println(mdto.getPw());
 		System.out.println(mdto.getUserName());
 		System.out.println(mdto.getEmail());
-		
+		System.out.println("리스트 확인용1");
+		System.out.println(memberDao.getMemberDBAll().);
+		model.addAttribute("userList", memberDao.getMemberDBAll());
 		
 		
 		return "signin";
@@ -56,9 +58,6 @@ public class MemberController {
 		System.out.println("myPageForm()");
 		
 		memberservice.loginconfirm(mdto);
-		System.out.println(mdto.getUserName()+"확인용2");
-		System.out.println(mdto+"확인용3");
-		System.out.println(mdto.getId()+"확인용4");
 		model.addAttribute("userName",memberDao.getMemberDB(mdto).getUserName());
 		
 		return "myPage";
