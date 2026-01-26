@@ -46,7 +46,7 @@ public class MemberController {
 		System.out.println(mdto.getUserName());
 		System.out.println(mdto.getEmail());
 		System.out.println("리스트 확인용1");
-		System.out.println(memberDao.getMemberDBAll().);
+		System.out.println(memberDao.getMemberDBAll());
 		model.addAttribute("userList", memberDao.getMemberDBAll());
 		
 		
