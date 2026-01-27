@@ -31,7 +31,11 @@
 					<tbody>
 						<tr th:each="li: ${list}">
 							<td th:text="${li.no}"></td>
-							<td th:text="${li.id}"></td>
+							<td>
+							<!-- a태그에서 th:href="@{/member/memberInfo(id=${li.id})}" -> 무조건 Get방식 -->
+								<a th:href="@{/member/memberInfo(id=${li.id})}"
+								th:text="${li.id}"></a>
+							</td>
 							<td th:text="${li.pw}"></td>
 							<td th:text="${li.mail}"></td>
 							<td th:text="${li.phone}"></td>
@@ -40,10 +44,14 @@
 						</tr>
 					</tbody>
 				</table>
+				
 			</div>
 		</div>
 	</section>
 	
 	<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+	<script th:if="${msg}" >
+		alert('[[${msg}]]');
+	</script>
 </body>
 </html>

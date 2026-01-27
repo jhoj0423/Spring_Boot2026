@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	
+	
+	<!-- <header th:replace="~{/include/header_nav_footer.html::header}"></header>
+	<nav th:replace="~{/include/header_nav_footer.html::nav}"></nav> -->
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>게시판 리스트 페이지 입니다</h2></div>
+			<div class="content">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>게시글 번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="li: ${list}">
+							<td th:text="${li.id}"></td>
+							<td th:text="${li.title}">
+							<!-- a태그에서 th:href="@{/member/memberInfo(id=${li.id})}" -> 무조건 Get방식 -->
+								<!-- <a th:href="@{/board/boardResult(id=${li.title})}"
+								th:text="${li.title}"></a> -->
+							</td>
+							<td th:text="${li.writer}"></td>
+							<td th:text="${li.createdAt}"></td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+		<a href="/board/boarderWrite">게시판 작성 하러 가기</a>
+		<a href="/board/boardResult">게시판 작성물 보러 가기</a>
+		<a href="/">메인으로 돌아가기</a>
+	</section>
+	
+	<!-- <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer> -->
+</body>
+</html>

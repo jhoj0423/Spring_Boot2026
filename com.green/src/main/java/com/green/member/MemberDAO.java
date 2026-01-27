@@ -107,4 +107,156 @@ public class MemberDAO {
 		System.out.println("memberDAO isMember()메소드 확인");
 		return false;
 	}
+	
+	
+	// ============== 2026년 1월 27일 추가 쿼리 작성 부분 ==================
+	// 개인 한 사람의 정보를 검색하는 메소드
+	public MemberDTO oneSelectMember(String id) {
+		// log찍기 
+		System.out.println("memberDAO oneSelectMember()메소드 확인");
+		// 반환받은 MemberDTO 객체를 생성한다.
+		MemberDTO mdto = new MemberDTO();
+		//sql구문을 작성
+		String  sql = "SELECT * FROM user_member WHERE id=?";
+		//예외 처리하는 트라이(자동 close를 위해 Connection설정)~ 캐치
+		try(
+				Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			//실행 구문 , ?대응을 먼저 작성한다.
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			// 한사람의 정보를 물을때도 if문으로 반드시 물어봐야한다.
+			// rs.next() 없이 값을 꺼내오면 -> 항상 DTO임을 주의하자!
+			if(rs.next()) {
+				mdto.setNo(rs.getInt("no"));
+				mdto.setId(rs.getString("id"));
+				mdto.setPw(rs.getString("pw"));
+				mdto.setMail(rs.getString("mail"));
+				mdto.setPhone(rs.getString("phone"));
+				mdto.setReg_date(rs.getString("reg_date"));
+				mdto.setMod_date(rs.getString("mod_date"));
+			}
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mdto;
+	}
+	
+	
+	// 개인 한사람의 정보를 수정하는 쿼리 
+	// 단 정보수정 할때 password 일치하는지확인
+	
+	public int updateMember(MemberDTO mdto) {
+		System.out.println("memberDAO updateMember()메소드 확인");
+		int result = 0;
+		String sql ="UPDATE user_member SET mail=? , phone =? WHERE id =?";
+		try(
+				Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			pstmt.setString(1, mdto.getMail());
+			pstmt.setString(2, mdto.getPhone());
+			pstmt.setString(3, mdto.getId());
+			result = pstmt.executeUpdate();
+			System.out.println("update result="+result);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	// 개인 한사람의 패스워드 리턴
+	public String getPass(String id) {
+		System.out.println("memberDAO getPass()메소드 확인");
+		String pass="";
+		String sql="SELECT pw FROM user_member WHERE id=?";
+		try(
+				Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			pstmt.setString(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				pass=rs.getString(1); // 패스워드 값에 저장된 mapping 인덱스
+			}
+			System.out.println("get pass result = "+pass);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return pass;
+	}
+	
+	
+	
+	// 한사람 개인의 정보를 삭제하는 메소드 작성
+	public int deleteMember(String id) {
+		int result = 0;
+		String sql ="DELETE FROM user_member WHERE id=?";
+		
+		try (
+				Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			pstmt.setString(1, id);
+			//쿼리문 실행 할때 executeUpdate -> 딜리트,인섵,업데이트
+			//select문 실행 할때는 executeQuery() 사용한다.
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+//	public MemberDTO setOneSelectMember(String id) {
+//		System.out.println("memberDAO setOneSelectMember()메소드 확인");
+//		MemberDTO mdto = new MemberDTO();
+//		String sql ="UPDATE user_member SET mail=? , phone =? WHERE id =?";
+//		try(
+//				Connection conn = datasource.getConnection();
+//				PreparedStatement pstmt = conn.prepareStatement(sql);
+//				){
+//			pstmt.setString(1, );
+//			pstmt.setString(2, );
+//			pstmt.setString(3, id);
+//			ResultSet rs = pstmt.executeQuery();
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}
+//		return mdto;
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
