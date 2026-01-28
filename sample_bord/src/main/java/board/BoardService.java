@@ -23,4 +23,16 @@ public class BoardService {
 		System.out.println("selectBoardAll() 메소드 확인용");
 		return boardDao.selectBoardsAll();
 	}
+
+	public BoardDTO oneSelect(int id) {
+		System.out.println("oneSelect() 메소드 확인용");
+		return boardDao.oneSelectBoard(id);
+	}
+
+	public boolean Rewriteboard(BoardDTO bdto) {
+		System.out.println("Rewriteboard() 메소드 확인용");
+		return boardDao.updateBoard(bdto)==1;
+	}
+
+	
 }

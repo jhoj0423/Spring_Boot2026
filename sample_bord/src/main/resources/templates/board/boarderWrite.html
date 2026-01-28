@@ -14,17 +14,20 @@
 						<input type="text" name="title" placeholder="제목">
 					</td>
 					<td>
-						<input type="text" name="title" placeholder="내용을 입력해주세요">
+						<input type="text" name="content" placeholder="내용을 입력해주세요">
+					</td>
+					<td>
+						<input type="text" name="writer" placeholder="작성자 이름을 입력해주세요">
 					</td>
 					<td>
 						<button type="submit" class="btn btn-OK">작성완료</button>
-						<a href="/board/boardList" class="btn">취소</a>
+						<a th:href="@{/board/boardList}" class="btn">취소</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</form>
 	
-	<a href="/board/boardList">게시판 리스트로 돌아가기</a>
+	<a th:href="@{/board/boardList}">게시판 리스트로 돌아가기</a>
 </body>
 </html>

@@ -26,10 +26,9 @@
 					<tbody>
 						<tr th:each="li: ${list}">
 							<td th:text="${li.id}"></td>
-							<td th:text="${li.title}">
-							<!-- a태그에서 th:href="@{/member/memberInfo(id=${li.id})}" -> 무조건 Get방식 -->
-								<!-- <a th:href="@{/board/boardResult(id=${li.title})}"
-								th:text="${li.title}"></a> -->
+							<td>
+								<a th:href="@{/board/boardResult(id=${li.id})}"
+								th:text="${li.title}"></a>
 							</td>
 							<td th:text="${li.writer}"></td>
 							<td th:text="${li.createdAt}"></td>
@@ -39,9 +38,9 @@
 				
 			</div>
 		</div>
-		<a href="/board/boarderWrite">게시판 작성 하러 가기</a>
-		<a href="/board/boardResult">게시판 작성물 보러 가기</a>
-		<a href="/">메인으로 돌아가기</a>
+		<a th:href="@{/board/boarderWrite}">게시판 작성 하러 가기</a>
+		<a th:href="@{/board/boardResult}">게시판 작성물 보러 가기</a>
+		<a th:href="@{/}">메인으로 돌아가기</a>
 	</section>
 	
 	<!-- <footer th:replace="~{/include/header_nav_footer.html::footer}"></footer> -->
