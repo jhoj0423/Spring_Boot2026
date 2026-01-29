@@ -3,31 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="styLesheet" th:href="@{/css/Main.css}">
 </head>
 <body>
-	<h2>게시판 작성 페이지 입니다</h2>
-	<form th:action="@{/board/boardWrite_confrim}" method="GET">
-		<table border="1">
-			<tbody>
-				<tr>
-					<td>
-						<input type="text" name="title" placeholder="제목">
-					</td>
-					<td>
-						<input type="text" name="content" placeholder="내용을 입력해주세요">
-					</td>
-					<td>
-						<input type="text" name="writer" placeholder="작성자 이름을 입력해주세요">
-					</td>
-					<td>
-						<button type="submit" class="btn btn-OK">작성완료</button>
-						<a th:href="@{/board/boardList}" class="btn">취소</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
-	
-	<a th:href="@{/board/boardList}">게시판 리스트로 돌아가기</a>
+	<header></header>
+	<section>
+		<h2>게시판 작성 페이지 입니다</h2>
+		<form th:action="@{/board/boardWrite_confrim}" method="GET">
+			<table border="1">
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" name="title" placeholder="제목">
+						</td>
+						<td>
+							<input type="text" name="content" placeholder="내용을 입력해주세요">
+						</td>
+						<td>
+							<input type="text" name="writer" placeholder="작성자 이름을 입력해주세요">
+						</td>
+						<td>
+							<button type="submit" class="btn btn-OK">작성완료</button>
+							<a th:href="@{/board/boardList}" class="btn">취소</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		
+		<a th:href="@{/board/boardList}">게시판 리스트로 돌아가기</a>
+	</section>
+	<footer></footer>
 </body>
 </html>

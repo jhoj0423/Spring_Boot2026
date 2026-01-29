@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="styLesheet" th:href="@{/css/Main.css}">
 </head>
 <body>
+	<header></header>
 	<section>
 		<h2>게시판 내용 페이지 입니다</h2>
 		<table border="1">
@@ -27,8 +29,14 @@
 				</tr>
 			</tbody>
 		</table>
-		<a th:href="@{/board/boardList}">게시판 리스트로 돌아가기</a>
-		<a th:href="@{/board/boardReWrite(id=${onelist.id})}">내용 수정 하러가기</a>
+		<a th:href="@{/board/boardList}" class="btn">게시판 리스트로 돌아가기</a>
+		<a th:href="@{/board/boardReWrite(id=${onelist.id})}" class="btn">내용 수정 하러가기</a>
+		<form th:action="@{/board/deletePro}" method="GET">
+			<input type="hidden" name="id" th:value="${onelist.id}">
+			<button type="submit">삭제하기</button>
+		</form>
+		
+		<footer></footer>
 	</section>
 </body>
 </html>

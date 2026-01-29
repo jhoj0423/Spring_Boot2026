@@ -15,9 +15,28 @@
 		</div>
 		<div id="header_wrap">
 			<a th:href="@{/}">HOME</a>
-			<a th:href="@{/member/signup}">회원가입</a>
-			<a th:href="@{/member/signin}">로그인</a>
-			<a th:href="@{/board/write}">게시판</a>
+			
+			<th:block th:if="${session.loginmember == null}">
+				<a th:href="@{/member/signup}">회원가입</a>
+				<a th:href="@{/member/login}">로그인</a>
+			</th:block>
+			
+			<th:block th:if="${session.loginmember != null && session.loginmember.id != 'admin9867'}">
+				<span th:text="${session.loginmember.id}"></span>님 환영
+				<a th:href="@{/member/logout}">로그아웃</a>
+				<a th:href="@{/member/memberInfo(id=${session.loginmember.id})}">마이페이지</a>
+			</th:block>
+			
+			<th:block th:if="${session.loginmember != null && session.loginmember.id == 'admin9867'}">
+				<span style="color: red;">관리자님</span>
+				<a th:href="@{/member/list}" style="color: yellowgreen;">[회원목록]</a>
+				<a th:href="@{/member/logout}">로그아웃</a>
+				<a th:href="@{/member/memberInfo(id=${session.loginmember.id})}">마이페이지</a>
+			</th:block>
+			
+			
+			
+			<a th:href="@{/board/list}">게시판</a>
 		</div>
 	</header>
 	<nav th:flagment="nav">

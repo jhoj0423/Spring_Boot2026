@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -62,22 +63,37 @@ public class BoardController {
 		return "board/boardReWrite";
 	}
 	
-	@PostMapping("/board/boardReWrite1")
+	@PostMapping("/board/boardReWrite")
 	public String RewriteSubmit(BoardDTO bdto, RedirectAttributes ra) {
 		System.out.println("RewriteSubmit() 확인용입니다");
 		boolean result = boardService.Rewriteboard(bdto);
-		System.out.println(result + "RewriteSubmitdptj result확인");
+		System.out.println("RewriteSubmit(^^)에서 result확인" + result);
 		System.out.println("RewriteSubmit() 에서 아이디 확인"+bdto.getId());
 		
 		if(result) {
+			System.out.println("aaa");
 			//ra.addFlashAttribute("msg","게시글이 수정되었습니다.");
-			return "redireat:/board/boardResult?id="+bdto.getId();
+			return "redirect:/board/boardList";
 		}else {
+			System.out.println("bbb");
 			//ra.addFlashAttribute("msg","게시글 수정에 실패 하였습니다.");
-			return "redireat:/board/boardReWrite?id="+bdto.getId();
+			return "redirect:/board/boardReWrite?id="+bdto.getId();
 		}
 		
 	}
+	
+	@GetMapping("/board/deletePro")
+	public String deletePro(@RequestParam("id") int id) {
+		System.out.println("deletePro() 확인용입니다");
+		boolean result = boardService.removeBorad(id);
+		System.out.println("id가 뭐야?" + id);
+		if(result) {
+			return "redirect:/board/boardList";
+		}else {
+			return "redirect:/board/boardResult?id="+id;
+		}
+	}
+	
 	
 	
 	

@@ -40,12 +40,33 @@ public class BoardController {
 	// 3. DB에서 전체 게시글 목록 select로 검색하여 추출 -> 모델객체 담는다
 	// 전체목록 화면 boardList.html로 이동한다.
 	
+//	@GetMapping("/board/list")
+//	public String boardList_form(Model model) {
+//		System.out.println("boardList_form메서드 구동 확인");
+//		List<BoardDTO> list = boardservice.allboard();
+//		
+//		
+//		model.addAttribute("list",list);
+//		String nextPage = "board/boardList";
+//		return nextPage;
+//	}
+	// 검색을 위한 리스트 커스텀
 	@GetMapping("/board/list")
-	public String boardList_form(Model model) {
+	public String boardList_form(Model model,
+			@RequestParam(value="searchType", required = false ) String searchType,
+			@RequestParam(value="searchKeyword", required = false) String searchKeyword
+			) {
 		System.out.println("boardList_form메서드 구동 확인");
-		List<BoardDTO> list = boardservice.allboard();
+		List<BoardDTO> list;
+		// 검색 종료 후 => 검색내용이 list 나오기
+		if(searchType != null && !searchKeyword.trim().isEmpty()) {
+			// service 에서 SearchBoard
+			list = boardservice.SearchBoard(searchType, searchKeyword);
+		}else {
+			list = boardservice.allboard();
+		}
 		
-		
+		// 검색하지 않고 전체 보기 list 나오기
 		model.addAttribute("list",list);
 		String nextPage = "board/boardList";
 		return nextPage;
@@ -94,6 +115,28 @@ public class BoardController {
 	}
 	
 	
+	// ====================== 2026-01-29 수정부분 ====================
+	//7. 하나의 게시글을 삭제하는 컨트롤러
+	//현재 boardInfo.html의 [삭제하기]버튼 클릭하면 삭제됨
+	//삭제된 후 board/list로 이동
+	// 삭제 실패 후는 boardInfo.html에 머문다.
+	@GetMapping("/board/deletePro")
+	public String boardDeletePro(
+			@RequestParam("num") int num,
+			@RequestParam("writerPw") String writerPw
+			) {
+		System.out.println("boardDeletePro(^o^)메서드 구동 확인");
+		// boardService removeBoard()메소드 삭제 :true 실패: false
+		boolean ischk = boardservice.removeBoard(num, writerPw);
+		
+		if(ischk) {
+			// 성공시 리스트로 이동
+			return "redirect:/board/list";
+		}else {
+			//삭제 실패시 페이지 그대로
+			return "redirect:/board/boardInfo?num"+num;			
+		}
+	}
 	
 	
 	

@@ -41,4 +41,54 @@ public class BoardService {
 		}
 	}
 	
+	// =============== 2026-01-29 수정부분 =======================
+	public boolean removeBoard(int num, String writerPw) {
+		System.out.println("removeBoard(**^^^) 메소드 확인용");
+		// DAO에서 받아오는 deleteBoard()는 삭제 = 1 , 아니면 0
+		int result = boardDao.deleteBoard(num, writerPw);
+		
+		if(result>0) {
+			System.out.println("게시글 삭제 성공");
+			return true;
+		}else {
+			System.out.println("게시글 삭제 실패");
+			return false;
+		}
+		
+	}
+	
+	//검색하기위한 메소드
+	public List<BoardDTO> SearchBoard(String searchType, String searchKeyword) {
+		System.out.println("SearchBoard(ㅠ^ㅠ) 메소드 확인용");
+		System.out.println("SearchBoard(ㅠ^ㅠ)searchType 확인용"+searchType);
+		System.out.println("SearchBoard(ㅠ^ㅠ)searchKeyword 확인용"+searchKeyword);
+		
+		return  boardDao.getSearchBoard(searchType, searchKeyword);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

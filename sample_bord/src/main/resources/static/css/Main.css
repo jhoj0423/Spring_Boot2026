@@ -1,0 +1,297 @@
+@charset "UTF-8";
+/* ========== Base ========== */
+:root{
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --line: rgba(17, 24, 39, 0.10);
+
+  --primary: #2563eb;      /* 포인트 컬러 */
+  --primary-weak: rgba(37, 99, 235, 0.12);
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+  --shadow-soft: 0 6px 18px rgba(17, 24, 39, 0.06);
+
+  --container: 1120px;
+}
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+body{
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans KR", Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 20% -10%, rgba(37, 99, 235, 0.12), transparent 60%),
+              radial-gradient(900px 500px at 90% 0%, rgba(99, 102, 241, 0.10), transparent 55%),
+              var(--bg);
+}
+
+/* 공통 컨테이너 폭: header, section, footer 모두 동일하게 맞춤 */
+
+
+header,
+section,
+footer{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ========== Header (SaaS 스타일 / sticky) ========== */
+header{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding-top: 14px;
+  padding-bottom: 14px;
+
+  /* sticky 배경 처리 */
+  background: rgba(246, 247, 251, 0.75);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+header .link_box{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end; /* 링크들 오른쪽 정렬 */
+  flex-wrap: wrap;
+}
+
+header .link_box a{
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 10px rgba(17, 24, 39, 0.04);
+
+  transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease;
+}
+
+header .link_box a:hover{
+  transform: translateY(-1px);
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 10px 18px rgba(17, 24, 39, 0.08);
+}
+
+header .link_box a:active{
+  transform: translateY(0px);
+  box-shadow: 0 6px 12px rgba(17, 24, 39, 0.07);
+}
+
+/* 첫 번째 링크만 포인트 버튼처럼(원하면 제거 가능) */
+header .link_box a:first-child{
+  background: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(99,102,241,0.95));
+  color: #fff;
+  border-color: transparent;
+}
+
+/* ========== Main Section (Hero 카드 느낌) ========== */
+section{
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+section{
+  /* 섹션 자체를 카드처럼 */
+  background: rgba(255,255,255,0.78);
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: var(--shadow);
+  margin: 0 auto;
+  margin-top: 22px;
+  text-align: center;
+}
+
+/* 내부 콘텐츠 정리 */
+section h2{
+  margin: 0 0 14px 0;
+  font-size: clamp(24px, 3vw, 40px);
+  letter-spacing: -0.02em;
+}
+
+/* 이미지 자리(현재 src 비어있어도 레이아웃 유지되게) */
+section img{
+  width: 100%;
+  max-width: 980px;
+  display: block;
+  margin-top: 18px;
+
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(37,99,235,0.10), rgba(99,102,241,0.08)),
+    repeating-linear-gradient(45deg, rgba(17,24,39,0.06) 0 12px, rgba(255,255,255,0) 12px 24px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* section 안에 설명 문구가 늘어날 걸 대비(선택) */
+section p{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ========== Footer ========== */
+footer{
+  margin-top: 22px;
+  margin-bottom: 26px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+
+  border-radius: calc(var(--radius) + 6px);
+  background: #0b1220;
+  color: rgba(255,255,255,0.82);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: var(--shadow-soft);
+
+  min-height: 80px; /* 내용 없어도 영역 보이게 */
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 640px){
+  header .link_box{
+    justify-content: center;
+  }
+  section{
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
+  section img{
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* ====================== TABLE ======================*/
+
+/* =========================
+   SaaS Table (시안 B 스타일)
+   ========================= */
+
+/* 테이블을 가운데 + 폭 제한(선택) */
+.table-wrap{
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* 테이블 기본 */
+table{
+  width: 100%;
+  border-collapse: separate;   /* radius 살리기 위해 */
+  border-spacing: 0;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  border-radius: 16px;
+  overflow: hidden;            /* 둥근 모서리 잘리게 */
+  box-shadow: 0 12px 24px rgba(17, 24, 39, 0.06);
+}
+
+/* 캡션(선택) */
+caption{
+  text-align: left;
+  padding: 14px 16px;
+  color: rgba(17, 24, 39, 0.75);
+  font-weight: 700;
+}
+
+/* 헤더 */
+thead th{
+  position: sticky; /* 테이블이 스크롤될 때 상단 고정 느낌(부모 스크롤일 때 효과) */
+  top: 0;
+  z-index: 1;
+
+  text-align: left;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+
+  padding: 14px 16px;
+  color: rgba(17,24,39,0.85);
+  background: linear-gradient(180deg, rgba(37,99,235,0.14), rgba(37,99,235,0.06));
+  border-bottom: 1px solid rgba(17, 24, 39, 0.12);
+}
+
+/* 바디 셀 */
+tbody td{
+  padding: 14px 16px;
+  font-size: 14px;
+  color: rgba(17,24,39,0.90);
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+  vertical-align: middle;
+}
+
+/* 줄무늬(가독성) */
+tbody tr:nth-child(even){
+  background: rgba(17, 24, 39, 0.02);
+}
+
+/* hover */
+tbody tr:hover{
+  background: rgba(37, 99, 235, 0.08);
+}
+
+/* 마지막 줄 아래 border 제거 */
+tbody tr:last-child td{
+  border-bottom: none;
+}
+
+/* 정렬 유틸(자주 씀) */
+td.num, th.num{ text-align: right; font-variant-numeric: tabular-nums; }
+td.center, th.center{ text-align: center; }
+
+/* 배지 느낌(선택: 상태값 표시할 때 좋음) */
+.badge{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid rgba(17, 24, 39, 0.10);
+  background: rgba(255,255,255,0.8);
+}
+
+/* 링크나 버튼이 테이블 안에 들어갈 때 */
+table a{
+  color: #2563eb;
+  font-weight: 700;
+  text-decoration: none;
+}
+table a:hover{
+  text-decoration: underline;
+}
+
+/* =========================
+   모바일 대응: 가로 스크롤
+   ========================= */
+@media (max-width: 720px){
+  .table-wrap{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 16px;
+  }
+
+  table{
+    min-width: 700px; /* 열이 많은 테이블이면 가로 스크롤로 */
+  }
+
+  thead th, tbody td{
+    padding: 12px 12px;
+  }
+}
+

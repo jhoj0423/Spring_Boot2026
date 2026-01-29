@@ -22,7 +22,7 @@ public class BoardDAO {
 		System.out.println("insertBoard() 메서드 확인용");
 		int result = 0;
 		// 성공하면 result =1 , 실패하면 0
-		String sql="INSERT INTO board(title,content,writer) VALUES(?,?,?)";
+		String sql="INSERT INTO board1(title,content,writer) VALUES(?,?,?)";
 		
 		
 		try (
@@ -45,7 +45,7 @@ public class BoardDAO {
 
 	public List<BoardDTO> selectBoardsAll() {
 		System.out.println("selectBoardsAll() 메소드 확인용");
-		String sql = "SELECT * FROM board";
+		String sql = "SELECT * FROM board1";
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		
 		try (
@@ -74,7 +74,7 @@ public class BoardDAO {
 	public BoardDTO oneSelectBoard(int id) {
 		System.out.println("oneSelectBoard() 메소드 확인용");
 		BoardDTO bdto = new BoardDTO();
-		String sql = "SELECT * FROM board WHERE id = ?";
+		String sql = "SELECT * FROM board1 WHERE id = ?";
 		
 		try (
 				Connection conn = datasource.getConnection();
@@ -103,7 +103,7 @@ public class BoardDAO {
 	public int updateBoard(BoardDTO bdto) {
 		System.out.println("updateBoard() 메소드 확인용");
 		int result =0;
-		String sql = "UPDATE board SET title=? , writer=? , content=? WHERE id =?";
+		String sql = "UPDATE board1 SET title=? , writer=? , content=? WHERE id =?";
 		try (
 				Connection conn = datasource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -124,4 +124,60 @@ public class BoardDAO {
 		
 		return result;
 	}
+	
+	
+	// ======================= 2026-01-29 수정부분 ======================
+	//삭제 메소드
+	
+	public int deleteBorad(int id) {
+		System.out.println("deleteBorad( • ᴗ - ) 메소드 확인용");
+		
+		String sql ="DELETE FROM board1 WHERE id=?";
+		int result = 0;
+		try(
+				Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			pstmt.setInt(1, id);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

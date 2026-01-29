@@ -31,8 +31,26 @@ public class BoardService {
 
 	public boolean Rewriteboard(BoardDTO bdto) {
 		System.out.println("Rewriteboard() 메소드 확인용");
+		System.out.println("Rewriteboard(^^^##) 메소드에서 boardDao.updateBoard(bdto)"+boardDao.updateBoard(bdto));
+		
 		return boardDao.updateBoard(bdto)==1;
 	}
-
+	
+	// ========== 2026-01-29 수정부분 =================
+	
+	public boolean removeBorad(int id) {
+		System.out.println("Rewriteboard( • ᴗ - )메소드 확인용");
+		
+		int result = boardDao.deleteBorad(id);
+		
+		if(result>0) {
+			// 삭제 성공
+			return true;
+		}else {
+			// 삭제 실패
+			return false;
+		}
+		
+	}
 	
 }

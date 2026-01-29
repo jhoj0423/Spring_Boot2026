@@ -162,10 +162,69 @@ public class BoardDAO {
 	}
 	
 	
+	// ===============  2026-01-29 수정부분 =================
+	//게시글 작성시 비밀번호 입력하였기 때문에 => 삭제시에도 비밀번호와 번호가 일치하는지 체크
+	public int deleteBoard(int num, String writerPw) {
+		System.out.println("deleteBoard(**^^^) 메소드 확인용");
+		
+		int result = 0;
+		
+		String sql = "DELETE FROM board WHERE num=? AND writerPw=?";
+		
+		try(
+				Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			pstmt.setInt(1, num);
+			pstmt.setString(2, writerPw);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return result;
+	}
 	
-	
-	
-	
+	// 게시글 검색하는 메소드
+	public List<BoardDTO> getSearchBoard(String searchType, String searchKeyword) {
+		System.out.println("searchBoard(ㅠ^ㅠ) 메소드 확인용");
+		List<BoardDTO> list = new ArrayList<BoardDTO>();
+		
+		String sql ="";
+		
+		if("subject".equals(searchType)) {
+			sql="SELECT * FROM board WHERE subject LIKE ? ORDER BY num DESC";
+		}else {
+			sql="SELECT * FROM board WHERE content LIKE ? ORDER BY num DESC";
+		}
+		
+		try(
+				Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				BoardDTO bdto = new BoardDTO();
+				bdto.setNum(rs.getInt("num"));
+				bdto.setWriter(rs.getString("writer"));
+				bdto.setSubject(rs.getString("subject"));
+				bdto.setWriterPw(rs.getString("writerPw"));
+				bdto.setReg_date(rs.getString("reg_date"));
+				bdto.setReadcount(rs.getInt("readcount"));
+				bdto.setContent(rs.getString("content"));
+				list.add(bdto);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	
 	

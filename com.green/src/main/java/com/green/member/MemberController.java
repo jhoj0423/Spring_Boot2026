@@ -3,6 +3,9 @@ package com.green.member;
 import java.util.List;
 
 import com.green.homeController;
+
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,12 +36,12 @@ public class MemberController {
 		String nextPage ="member/signup_result";
 		//회원가입이 제대로 되었는지 , 실패하였는지 예외처리
 		int result = memberservice.signupConfirm(mdto);
-		
+		model.addAttribute("result",result);
 		//회원가입이 성공하였을 경우 => 회원 목록인 새로운 주소로 이동
 		if(result == MemberService.user_id_success) {
-			return "redirect:/member/list";
+			return nextPage;
 		}else {
-			model.addAttribute("result",result);
+			
 			return nextPage;
 		}
 		
@@ -129,12 +132,62 @@ public class MemberController {
 	}
 	
 	
+	//로그인 양식 폼
+	@GetMapping("/member/login")
+	public String login() {
+		System.out.println("MemberController login()메소드 확인");
+		String nextPage ="member/login_form";
+		return nextPage;
+	}
+
+	// 로그인 작동 확인
+	@PostMapping("/member/loginPro")
+	public String loginPro(MemberDTO mdto,HttpSession session) {
+		System.out.println("MemberController loginPro(-v-)메소드 확인");
+		
+		MemberDTO loginMember = memberservice.loginConfirm(mdto);
+		System.out.println("MemberController loginMember(-v-)메소드 확인"+loginMember);
+		System.out.println("MemberController loginMember(-v-)메소드 확인"+loginMember.getId());
+		//Model객체는 요청 1번짜리 이다.
+		//화면 이동하면 => 바로 사라짐
+		
+		if(loginMember != null) {
+			// 로그인 성공
+			// model을 이용해서 loginMember 담는다
+			// 로그인 유지가 안됨
+			
+			//Session(세션) => 스핑링부트의 내장 객체
+			//             => 스프링에서 꺼내 사용하기 편리하다.
+			// HttpSession
+			// Session이란 => 서버가 사용자 한 명을 기억하기 위해 상용하는 저장공간
+			// 로그인 유지가 가능하다.
+			
+			// Session 기본 3가지 명령어
+			// 1. 세션에 값정장하기
+			// session,setAttribute("이름",값) => 로그인 서옹시 사용
+			// 2. 세션에 저장된 값 가져오기
+			// session.getAttribute("이름") => 로그인 여부확인
+			// 3. 세션 전체 삭제
+			// session.invalidate() => 로그아웃
+			
+			session.setAttribute("loginmember", loginMember);
+			return "redirect:/";
+		}else {
+			//로그인 실패
+			return"redirect:/member/login";
+		}
+		
+	}
 	
 	
-	
-	
-	
-	
+	@GetMapping("/member/logout")
+	public String logout(HttpSession session) {
+		System.out.println("MemberController logout(-u-)메소드 확인");
+		
+		session.invalidate();
+		
+		return "redirect:/";
+	}
 	
 	
 	

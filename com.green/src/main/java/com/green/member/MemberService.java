@@ -3,6 +3,7 @@ package com.green.member;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //컨트롤러에서 -> 서비스 : 다오 메소드 찾아서 있어? 
@@ -25,12 +26,29 @@ public class MemberService {
 	@Autowired
 	MemberDAO memberdao;
 	
+	//PasswordEncoder객체도 DI(의존객체)를 정의한다.
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	
+	
 	public int signupConfirm(MemberDTO mdto) {
 		System.out.println("MemberService signConfirm() 메소드 확인");
 		//회원가입 중복 체크
 		boolean isMember = memberdao.isMember(mdto.getId());
 		if(isMember == false) {
-			//중복된 아이디가 존재하지 않을때 DB에 삽입되어야 한다.
+			
+			// 문자인 pw를 암호화된 비밀번호로 변화해주는 코드
+			// passwordEncoder.encode(null) 안에 암호화 하고 싶은 필드명 입력
+			// Encode(암호화) : 인간언어 -> 기계어
+			// Decode(복호화) : 기계어 -. 인간언어
+			String encodepw = passwordEncoder.encode(mdto.getPw());
+			
+			// 암호화된 encodepw 를 mdto.getpw() => 수정
+			mdto.setPw(encodepw);
+			
+			// 중복된 아이디가 존재하지 않을때 DB에 삽입되어야 한다.
+			// DB에 회원정보가 추가되는 부분 => 암호화가 이루어져야 한다.
 			int result = memberdao.insertMember(mdto);
 			if(result>0) {
 				return user_id_success; // result =1
@@ -93,7 +111,24 @@ public class MemberService {
 	
 	
 	
-	
+	// 암호화된 DB를 복호화하여 로그인하는 메소드
+	public MemberDTO loginConfirm(MemberDTO mdto) {
+		System.out.println("MemberService loginConfirm(-^-^) 메소드 확인");
+		
+		//1.DB에서 해당정보의 id 가져오기
+		MemberDTO dbMember = memberdao.oneSelectMember(mdto.getId());
+		
+		// 2. DB에서 꺼내온 id의 비밀번호와 입력한 값이 일치 하는지확인
+		// 암호화된 데이터를 PasswordEncoder.matches(사용자 입력한 문,DB에 정당된 암호문)
+		if(dbMember != null && dbMember.getPw() != null) {
+			if(passwordEncoder.matches(mdto.getPw(), dbMember.getPw())) {
+				//로그인 성공한 경우
+				
+				return dbMember;
+			}
+		}
+		return null; // 로그인 실패
+	}
 	
 	
 	
