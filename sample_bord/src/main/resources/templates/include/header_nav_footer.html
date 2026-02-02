@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Member Join</title>
+<link rel="styLesheet" th:href="@{/css/Main.css}">
+</head>
+<body>
+
+	<header th:flagment="header">
+		<div class="link_box">
+			<a href="/">홈</a>
+			<a href="/member/signup">회원가입</a>
+			<a href="/member/login">로그인</a>
+			<a href="/board/boardList">게시판</a>
+		</div>
+	</header>
+	<nav th:flagment="nav">
+		<div id="nav_wrap">
+			<a th:href="@{/example}">EXAMPLE</a>
+		</div>
+	</nav>
+	<footer th:flagment ="footer">
+		<div id="footer_wrap">
+			Copyright OFFICE @Green
+		</div>
+	</footer>
+	
+</body>
+</html>

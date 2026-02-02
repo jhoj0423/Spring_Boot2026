@@ -6,6 +6,7 @@
 <link rel="styLesheet" th:href="@{/css/Main.css}">
 </head>
 <body>
+	<header th:replace="~{/include/header_nav_footer.html::header}"></header>
 	<section>
 		<h2>게시글 수정 페이지</h2>
 		<form th:action="@{/board/boardReWrite(id=${bwt.id})}" method="POST">
@@ -27,5 +28,6 @@
 			</div>
 		</form>	
 	</section>
+	<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
 </body>
 </html>

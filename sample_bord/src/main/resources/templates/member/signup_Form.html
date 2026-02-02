@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="styLesheet" th:href="@{/css/Main.css}">
+</head>
+<body>
+	<header th:replace="~{/include/header_nav_footer.html::header}"></header>
+	<section>
+		<h2>회원가입 페이지</h2>
+		<form th:action="@{signupPro}" method="POST">
+			<table>
+				<tbody>
+					<tr>
+						<td>아이디</td>
+						<td>
+							<input type="text" name="id" placeholder="아이디를 입력해주세요">
+						</td>
+					</tr>
+					<tr>
+						<td>비밀번호</td>
+						<td>
+							<input type="password" name="password" placeholder="비밀번호를 입력해주세요">
+						</td>
+					</tr>
+					<tr>
+						<td>비밀번호 확인</td>
+						<td>
+							<input type="password" name="passwordchk" placeholder="비밀번호를 다시 입력해주세요">
+						</td>
+					</tr>
+					<tr>
+						<td>전화번호</td>
+						<td>
+							<input type="tel" name="phone" placeholder="전화번호를 입력해주세요">
+						</td>
+					</tr>
+					<tr>
+						<td>이메일</td>
+						<td>
+							<input type="email" name="email" placeholder="이메일을 입력해주세요">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button type="submit">회원가입</button>
+			<a th:href="@{/}">취소</a>
+		</form>
+	</section>
+	<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+</body>
+</html>
