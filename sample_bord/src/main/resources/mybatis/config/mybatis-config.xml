@@ -3,7 +3,8 @@
 "https://mybatis.org/
 dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
-		<typeAlias alias="MemberDTO" type="com.green.member.MemberDTO"/>
-	</typeAliases>
+  <typeAliases>
+  	 <typeAlias alias="MemberDTO" type="com.green.member.MemberDTO" />
+  	 <typeAlias alias="BoardDTO" type="com.green.board.BoardDTO" />
+  </typeAliases>
 </configuration>

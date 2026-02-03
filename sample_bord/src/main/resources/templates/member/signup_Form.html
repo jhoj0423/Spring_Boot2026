@@ -9,7 +9,7 @@
 	<header th:replace="~{/include/header_nav_footer.html::header}"></header>
 	<section>
 		<h2>회원가입 페이지</h2>
-		<form th:action="@{signupPro}" method="POST">
+		<form th:action="@{/member/signupPro}" method="POST">
 			<table>
 				<tbody>
 					<tr>
@@ -21,13 +21,13 @@
 					<tr>
 						<td>비밀번호</td>
 						<td>
-							<input type="password" name="password" placeholder="비밀번호를 입력해주세요">
+							<input type="password" name="pw" placeholder="비밀번호를 입력해주세요">
 						</td>
 					</tr>
 					<tr>
 						<td>비밀번호 확인</td>
 						<td>
-							<input type="password" name="passwordchk" placeholder="비밀번호를 다시 입력해주세요">
+							<input type="password" name="pwchk" placeholder="비밀번호를 다시 입력해주세요">
 						</td>
 					</tr>
 					<tr>
@@ -39,7 +39,7 @@
 					<tr>
 						<td>이메일</td>
 						<td>
-							<input type="email" name="email" placeholder="이메일을 입력해주세요">
+							<input type="email" name="mail" placeholder="이메일을 입력해주세요">
 						</td>
 					</tr>
 				</tbody>

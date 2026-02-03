@@ -6,8 +6,7 @@
 <!-- insert / delete / update 문은 resultType를 사용하지 않는다 -->
 <!-- insert / delete / update 문은 한 행의 결과를 int 반환한다 -->
 
-<insert id="insertMember" 
-	parameterType="MemberDTO">
+<insert id="insertMember" parameterType="MemberDTO">
 	INSERT INTO user_member(id,pw,mail,phone) VALUES(#{id},#{pw},#{mail},#{phone})
 </insert>
 

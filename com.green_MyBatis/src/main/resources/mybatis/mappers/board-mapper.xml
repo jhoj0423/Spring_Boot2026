@@ -28,7 +28,7 @@
 	</update>
 	
 	<delete id="deleteBoard" >
-		DELETE FROM board WHERE num=#{num} AND writerPw=#{writerPW}
+		DELETE FROM board WHERE num=#{num} AND writerPw=#{writerPw}
 	</delete>
 	
 	<!-- 검색 -->
@@ -46,6 +46,15 @@
 			</choose>
 		</where>
 		ORDER BY num DESC
+	</select>
+	
+	<select id="getAllcount" resultType="int">
+		SELECT COUNT(*) FROM board
+	</select>
+	
+	<select id="getPagelist" resultType="BoardDTO">
+		SELECT *FROM board ORDER BY num DESC
+		LIMIT #{startRow}, #{pageSize}
 	</select>
 	
 	

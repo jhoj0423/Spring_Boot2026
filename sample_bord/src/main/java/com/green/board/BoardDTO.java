@@ -1,4 +1,4 @@
-package board;
+package com.green.board;
 
 public class BoardDTO {
 	private int id;

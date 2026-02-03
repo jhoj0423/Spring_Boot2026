@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.board.mapper.BoardMapper">
+	<insert id="insertBoard" parameterType="BoardDTO">
+		INSERT INTO board1(title,content,writer) VALUES(#{title},#{content},#{writer})
+	</insert>
+	
+	<select id="selectBoardsAll" resultType="BoardDTO">
+		SELECT * FROM board1
+	</select>
+	
+	<select id="oneSelectBoard" resultType="BoardDTO" parameterType="int">
+		SELECT * FROM board1 WHERE id = #{id}
+	</select>
+	
+	<update id="updateBoard" parameterType="BoardDTO">
+		UPDATE board1 SET title=#{title} , writer=#{writer} , content=#{content} WHERE id =#{id}
+	</update>
+	
+	<delete id="deleteBorad" parameterType="int">
+		DELETE FROM board1 WHERE id=#{id}
+	</delete>
+	
+	<select id="getAllcount" resultType="int">
+		SELECT COUNT(*) FROM board1
+	</select>
+	
+	<select id="getPageList" resultType="BoardDTO">
+		SELECT * FROM board1 ORDER BY num DESC 
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+</mapper>

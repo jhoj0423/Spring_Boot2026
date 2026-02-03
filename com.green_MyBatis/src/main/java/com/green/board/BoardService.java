@@ -75,7 +75,17 @@ public class BoardService {
 	}
 	
 	
+	// ============= 2026-02-03 수정부분 ==========
 	
+	public int getAllcount() {
+		System.out.println("service getAllcount(z-z)메서드 확인");
+		return boardMapper.getAllcount();
+	}
+	
+	public List<BoardDTO> getPagelist(int startRow,int pageSize){
+		System.out.println("service getPagelist(z_z)메서드 확인");
+		return boardMapper.getPagelist(startRow, pageSize);
+	}
 	
 	
 	

@@ -9,16 +9,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import com.green.Application;
 import com.green.member.MemberDTO;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class BoardController {
+
+    private final Application application;
 	
 	@Autowired
 	BoardService boardservice;
+
+    BoardController(Application application) {
+        this.application = application;
+    }
 	
 	// 1. 게시글 작성 폼화면으로 이동하는 핸들러
 	@GetMapping("/board/write")
@@ -73,20 +79,35 @@ public class BoardController {
 	@GetMapping("/board/list")
 	public String boardList_form(Model model,
 			@RequestParam(value="searchType", required = false ) String searchType,
-			@RequestParam(value="searchKeyword", required = false) String searchKeyword
+			@RequestParam(value="searchKeyword", required = false) String searchKeyword,
+			//페이지 번호 1부터 시작이므로 초기값 1로 정의 
+			@RequestParam(value="page",defaultValue="1") int page,
+			// 한화면에 보여지는 페이지 수를 5로 초기화 한다.
+			@RequestParam(value="pageSize",defaultValue="5") int pageSize
 			) {
 		System.out.println("boardList_form메서드 구동 확인");
+		// 전체 게시글의 수
+		int totalCnt = boardservice.getAllcount();
+		// 페이지 핸들러 인스터스화
+		PageHandler p = new PageHandler(totalCnt, page, pageSize);
+		
+		
+		boardservice.getPagelist(0, 0);
 		List<BoardDTO> list;
 		// 검색 종료 후 => 검색내용이 list 나오기
 		if(searchType != null && !searchKeyword.trim().isEmpty()) {
 			// service 에서 SearchBoard
 			list = boardservice.SearchBoard(searchType, searchKeyword);
 		}else {
-			list = boardservice.allboard();
+//			list = boardservice.allboard();
+			list = boardservice.getPagelist(p.getStartRow(), pageSize);
 		}
 		
 		// 검색하지 않고 전체 보기 list 나오기
 		model.addAttribute("list",list);
+		// PageHandler 클래스 모두 model객체에 담아서 html로 보내야 application
+		// 그래야 UI 화면에 페이지 그릴 수 있다
+		model.addAttribute("p",p); // PageHandler클래스를 인스턴스한 참조변수이다.
 		String nextPage = "board/boardList";
 		return nextPage;
 	}

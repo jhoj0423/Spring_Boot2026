@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="board.member.mapper.Membermapper">
-	<!-- 회원 중복 확인 --> 
+<mapper namespace="com.green.member.mapper.MemberMapper">
+	<insert id="insertMember" parameterType="MemberDTO">
+		INSERT INTO user_member1(id,pw,mail,phone) VALUES(#{id},#{pw},#{mail},#{phone})
+	</insert>
+	
 	<select id="isMember" parameterType="String" resultType="boolean">
-		SELECT count(*) FROM user_member1 WHERE id = #{id}
+		<!-- 카운트가 0이면 false 1이상이면 true 라고 함 (아님말고) -->
+		SELECT COUNT(*) FROM user_member1 WHERE id = #{id}
 	</select>
 	
-	<!-- 회원가입 -->
-	<insert id="insertNewMember" parameterType="MemberDTO">
-		INSERT INTO ()
-	</insert>
+	<select id="oneSelectMember" parameterType="String" resultType="MemberDTO">
+		SELECT * FROM user_member1 WHERE id=#{id}
+	</select>
+	
 </mapper>

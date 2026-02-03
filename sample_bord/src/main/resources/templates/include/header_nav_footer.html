@@ -9,10 +9,16 @@
 
 	<header th:flagment="header">
 		<div class="link_box">
-			<a href="/">홈</a>
-			<a href="/member/signup">회원가입</a>
-			<a href="/member/login">로그인</a>
-			<a href="/board/boardList">게시판</a>
+			<a th:href="@{/}">홈</a>
+			<th:block th:if="${session.loginmember == null}">
+				<a th:href="@{/member/signup}">회원가입</a>
+				<a th:href="@{/member/login}">로그인</a>
+			</th:block>
+			<th:block th:if="${session.loginmember != null}">
+				<span th:text="${session.loginmember.id}"></span>님환영합니다
+				<a th:href="@{/member/logout}">로그아웃</a>
+			</th:block>
+			<a th:href="@{/board/boardList}">게시판</a>
 		</div>
 	</header>
 	<nav th:flagment="nav">

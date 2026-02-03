@@ -1,4 +1,4 @@
-package board;
+package com.green.board;
 
 import java.util.List;
 
@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import board.PageHandler;
+
 @Controller
 public class BoardController {
 	
@@ -18,11 +20,25 @@ public class BoardController {
 	
 	// 게시판 리스트 출력
 	@GetMapping("/board/boardList")
-	public String boardList(Model model) {
+	public String boardList(Model model,
+	@RequestParam(value="page", required = false ,defaultValue = "1") int page,
+	@RequestParam(value="pageSize",required = false, defaultValue = "5")int pageSize
+			) {
 		System.out.println("boardList() 확인용입니다");
-		List<BoardDTO> boardList = boardService.selectBoardAll();
+		
+		int totalCnt = boardService.getAllcount();
+		
+		PageHandler ph = new PageHandler(totalCnt, page, pageSize);
+		
+	
+		List<BoardDTO> boardList = boardService.getPageList(ph.getStartRow(), ph.getEndRow());
 		System.out.println(boardList+"boardList내용확인용");
+		
 		model.addAttribute("list",boardList);
+		model.addAttribute("ph",ph);
+		
+	
+		
 		return "board/boardList";
 	}
 	// 게시판 내용 페이지 출력

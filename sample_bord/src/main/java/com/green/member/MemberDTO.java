@@ -1,6 +1,6 @@
-package board.member;
+package com.green.member;
 
-public class memberDTO {
+public class MemberDTO {
 	private int no;
 	private	String id;
 	private String pw;
@@ -8,6 +8,8 @@ public class memberDTO {
 	private String mail;
 	private String reg_date;
 	private String mod_date;
+	
+	
 	public int getNo() {
 		return no;
 	}

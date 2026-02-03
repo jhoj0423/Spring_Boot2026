@@ -32,8 +32,12 @@
 								<td width="150" align="center">작성일자</td>
 								<td width="80" align="center">조회수</td>
 							</tr>
-							<tr height="50" th:each="li:${list}">	
-								<td th:text="${li.num}"></td>						
+							<tr height="50" th:each="li, stat:${list}">	
+<!-- 								<td th:text="${li.num}"></td>						 -->
+<!-- 								전체 게시글의 번호를 최신수으로 계산하는 공식						 -->
+<!-- 								전체게시글 개수 -((현제페이지 번호-1)*한 화면 게시글 개수)						 -->
+<!-- 								- 현재글 index번호						 -->
+								<td th:text="${p.totalCnt-((p.pageNum-1)*p.pageSize)-stat.index}"></td>						
 								<td> <a th:href="@{/board/boardInfo(num=${li.num})}" th:text="${li.subject}"></a></td>						
 								<td th:text="${li.writer}"></td>						
 								<td th:text="${li.reg_date}"></td>						
@@ -41,6 +45,21 @@
 							</tr>						
 						</tbody>
 					</table>
+					<!-- 페이징 화면 시작 -->
+					<div class="paging">
+						<!-- 이전 -->
+						<a th:if="${p.prev}" th:href="@{/board/list(page=${p.startPage-1})}">◀</a>
+						<!-- 페이지 번호 출력 -->
+						<!-- [7][8][9] -->
+						<span th:each="i : ${#numbers.sequence(p.startPage,p.endPage)}">
+							<a th:href="@{/board/list(page=${i})}"
+								th:text="${i}" th:classappend="${i == p.pageNum ? 'active':''}"
+							></a>
+						</span>
+						<!-- 다음 -->
+						<a th:if="${p.next}" th:href="@{/board/list(page=${p.endPage+1})}">▶</a>
+					</div>
+					<!-- 페이징 종료 화면 -->
 					<div id="search_wrap">
 						<form th:action="@{/board/list}" method="GET">
 							<select name="searchType">

@@ -29,8 +29,8 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="li: ${list}">
-							<td th:text="${li.id}"></td>
+						<tr th:each="li, stat: ${list}">
+							<td th:text="${ph.totalCnt - ((ph.pageNum -1)*ph.pageSize) - stat.index}"></td>
 							<td>
 								<a th:href="@{/board/boardResult(id=${li.id})}"
 								th:text="${li.title}"></a>
@@ -40,7 +40,19 @@
 						</tr>
 					</tbody>
 				</table>
-				
+				<div class="paging">
+						<!-- 이전 -->
+						<a th:if="${p.prev}" th:href="@{/board/list(page=${p.startPage-1})}">◀</a>
+						<!-- 페이지 번호 출력 -->
+						<!-- [7][8][9] -->
+						<span th:each="i : ${#numbers.sequence(p.startPage,p.endPage)}">
+							<a th:href="@{/board/list(page=${i})}"
+								th:text="${i}" th:classappend="${i == p.pageNum ? 'active':''}"
+							></a>
+						</span>
+						<!-- 다음 -->
+						<a th:if="${p.next}" th:href="@{/board/list(page=${p.endPage+1})}">▶</a>
+					</div>
 			</div>
 		</div>
 	</section>
