@@ -26,8 +26,8 @@
 		SELECT COUNT(*) FROM board1
 	</select>
 	
-	<select id="getPageList" resultType="BoardDTO">
-		SELECT * FROM board1 ORDER BY num DESC 
+	<select id="getPagelist" resultType="BoardDTO">
+		SELECT * FROM board1 ORDER BY id DESC 
 		LIMIT #{startRow}, #{pageSize}
 	</select>
 	

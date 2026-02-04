@@ -56,6 +56,55 @@
 		SELECT *FROM board ORDER BY num DESC
 		LIMIT #{startRow}, #{pageSize}
 	</select>
+
+	<select id="getSearchCount" resultType="int">
+		SELECT COUNT(*) FROM board
+		<where>
+			<choose>
+				<when test="searchType == 'subject'">
+					subject LIKE CONCAT("%",#{searchKeyword},"%")
+				</when>
+				<otherwise>
+					content LIKE CONCAT("%",#{searchKeyword},"%")				
+				</otherwise>
+			</choose>
+		</where>
+	</select>
+
+	<select id="getSearchPageList" resultType="BoardDTO">
+		SELECT * FROM board 
+		<where>
+			<choose>
+				<when test="searchType == 'subject'">
+					subject LIKE CONCAT("%",#{searchKeyword},"%")
+				</when>
+				<otherwise>
+					content LIKE CONCAT("%",#{searchKeyword},"%")				
+				</otherwise>
+			</choose>
+		</where>
+		ORDER BY num DESC
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+	<select id="getMyBoardCount" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM board WHERE id=#{loginId}
+	</select>
+	<!-- user_member의 id와 board의 id 같은 게시글의 목록만 검색 -->
+	<!-- select 필드명 from 테이블이름 별칭 inner join 테이블 이름 별칠 on 별칭.pk = 별칭.fk -->
+	<select id="getMyBoardList" resultType="BoardDTO">
+		SELECT 
+			b.num,
+			b.subject,
+			b.reg_date,
+			b.readcount,
+			m.id as writer
+		FROM board b INNER JOIN user_member m ON b.id=m.id
+		WHERE b.id = #{loginId}
+		ORDER BY b.num DESC
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+	
 	
 	
 </mapper>

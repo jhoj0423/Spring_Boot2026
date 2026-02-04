@@ -24,6 +24,7 @@ public class MemberService {
 	public int signup_config(MemberDTO mdto) {
 		System.out.println("Service signup_config(o0o) 메서드 확인");
 		boolean chking = memberMapper.isMember(mdto.getId());
+		System.out.println("chking 메서드 확인" + chking);
 		if(chking == false) {
 			// 비밀 번호를 암호화
 			String encodepw = passwordEncoder.encode(mdto.getPw());

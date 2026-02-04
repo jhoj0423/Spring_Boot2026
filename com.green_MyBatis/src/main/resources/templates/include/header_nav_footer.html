@@ -23,8 +23,10 @@
 			
 			<th:block th:if="${session.loginmember != null && session.loginmember.id != 'admin9867'}">
 				<span th:text="${session.loginmember.id}"></span>님 환영
+				
 				<a th:href="@{/member/logout}">로그아웃</a>
 				<a th:href="@{/member/memberInfo(id=${session.loginmember.id})}">마이페이지</a>
+				<a th:href="@{/board/mypage}">MyBoard</a>
 			</th:block>
 			
 			<th:block th:if="${session.loginmember != null && session.loginmember.id == 'admin9867'}">
@@ -32,6 +34,7 @@
 				<a th:href="@{/member/list}" style="color: yellowgreen;">[회원목록]</a>
 				<a th:href="@{/member/logout}">로그아웃</a>
 				<a th:href="@{/member/memberInfo(id=${session.loginmember.id})}">마이페이지</a>
+				<a th:href="@{/board/mypage}">MyBoard</a>
 			</th:block>
 			
 			

@@ -28,16 +28,22 @@ public class MemberController {
 	@PostMapping("/member/signupPro")
 	public String signupPro(MemberDTO mdto, Model model) {
 		System.out.println("controller signupPro(*_*) 메소드확인");
+		
 		int result = memberService.signup_config(mdto);
 		
+		System.out.println("rrrr"+result);
+		
 		model.addAttribute("result",result);
+		
 		System.out.println("(*_*)"+result);
-		if(result>0) {
+		if(result == memberService.user_id_success) {
 			System.out.println("controller signupPro(*_*) 회원가입 성공");
-			return "redirect:/member/signup_result";
+			
+			return "member/signup_result";
 		}else {
 			System.out.println("controller signupPro(*_*) 회원가입 실패");
-			return "redirect:/member/signup_result";
+			
+			return "member/signup_result";
 		}
 		
 	}

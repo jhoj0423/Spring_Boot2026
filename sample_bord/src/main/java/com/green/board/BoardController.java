@@ -31,7 +31,8 @@ public class BoardController {
 		PageHandler ph = new PageHandler(totalCnt, page, pageSize);
 		
 	
-		List<BoardDTO> boardList = boardService.getPageList(ph.getStartRow(), ph.getEndRow());
+		List<BoardDTO> boardList = boardService.getPageList(ph.getStartRow(), pageSize);
+		
 		System.out.println(boardList+"boardList내용확인용");
 		
 		model.addAttribute("list",boardList);

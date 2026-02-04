@@ -87,7 +87,17 @@ public class BoardController {
 			) {
 		System.out.println("boardList_form메서드 구동 확인");
 		// 전체 게시글의 수
-		int totalCnt = boardservice.getAllcount();
+//		int totalCnt = boardservice.getAllcount();
+		int totalCnt;
+		
+		if(searchType != null && !searchKeyword.trim().isEmpty()) {
+			totalCnt=boardservice.getSearchCount(searchType, searchKeyword);
+		}else {
+			totalCnt=boardservice.getAllcount();
+		}
+		
+		
+		
 		// 페이지 핸들러 인스터스화
 		PageHandler p = new PageHandler(totalCnt, page, pageSize);
 		
@@ -97,7 +107,7 @@ public class BoardController {
 		// 검색 종료 후 => 검색내용이 list 나오기
 		if(searchType != null && !searchKeyword.trim().isEmpty()) {
 			// service 에서 SearchBoard
-			list = boardservice.SearchBoard(searchType, searchKeyword);
+			list = boardservice.getSearchPageList(searchType, searchKeyword, p.getStartRow(), pageSize);
 		}else {
 //			list = boardservice.allboard();
 			list = boardservice.getPagelist(p.getStartRow(), pageSize);
@@ -108,6 +118,11 @@ public class BoardController {
 		// PageHandler 클래스 모두 model객체에 담아서 html로 보내야 application
 		// 그래야 UI 화면에 페이지 그릴 수 있다
 		model.addAttribute("p",p); // PageHandler클래스를 인스턴스한 참조변수이다.
+		
+		// 서치하는 항목이 타입과, 항목을 UI 넘겨주지 않으면 ,오류 난다
+		//반드시 searchType,searchKeyword 를 model담아서 boardList.html로 넘겨준다.
+		model.addAttribute("searchType",searchType);
+		model.addAttribute("searchKeyword",searchKeyword);
 		String nextPage = "board/boardList";
 		return nextPage;
 	}
@@ -178,8 +193,38 @@ public class BoardController {
 		}
 	}
 	
-	
-	
+	// 로그인된 나의 게시글 목록을 검색하는 핸들러
+	@GetMapping("/board/mypage")
+	public String myBoardList(Model model, HttpSession session,@RequestParam(value = "page",defaultValue = "1") int page ) {
+		
+		// 세션 키 이름을 loginmember로 가져오기
+		// 세션 키 값 가져오는 메소드 : getAttribute("loginmember")
+		// id="kkk" 해당하는 행 전체
+		// 다운캐스팅 하기
+		// loginId 에 MemberDTO의 멤버변수 모두 저장됨을 주의하자
+		MemberDTO loginId = (MemberDTO)session.getAttribute("loginmember");
+		
+		// 로그인이 실패 또는 로그인이 안된 상태라면 => member/login 로 이동
+		if(loginId == null) {
+			System.out.println("로그인 정보가 없습니다.");
+			return "redirect:/member/login";
+		}
+		
+		int pageSize = 5;
+		//로그인된 내 게시긓의 개수 조회
+		int totalCnt = boardservice.getMyBoardCount(loginId.getId());
+		
+		PageHandler ph = new PageHandler(totalCnt, page, pageSize);
+		
+		// 로그인된 내 게시글의 목록
+		List<BoardDTO> mylist = boardservice.getMyBoardList(loginId.getId(), ph.getStartRow(), pageSize);
+		
+		model.addAttribute("list",mylist);
+		model.addAttribute("ph",ph);
+		
+		
+		return "/board/mypage";
+	}
 	
 	
 	

@@ -1,13 +1,13 @@
-package com.green;
+package reviewboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleBoardApplication {
+public class ReviewboardJhjApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleBoardApplication.class, args);
+		SpringApplication.run(ReviewboardJhjApplication.class, args);
 	}
 
 }

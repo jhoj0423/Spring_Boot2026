@@ -1,10 +1,10 @@
-package com.green;
+package reviewboard;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SampleBoardApplicationTests {
+class ReviewboardJhjApplicationTests {
 
 	@Test
 	void contextLoads() {

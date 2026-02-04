@@ -48,16 +48,19 @@
 					<!-- 페이징 화면 시작 -->
 					<div class="paging">
 						<!-- 이전 -->
-						<a th:if="${p.prev}" th:href="@{/board/list(page=${p.startPage-1})}">◀</a>
+						<a th:if="${p.prev}" th:href="@{/board/list(page=${p.startPage-1},
+						searchType=${searchType}, searchKeyword=${searchKeyword})}">◀</a>
 						<!-- 페이지 번호 출력 -->
 						<!-- [7][8][9] -->
 						<span th:each="i : ${#numbers.sequence(p.startPage,p.endPage)}">
-							<a th:href="@{/board/list(page=${i})}"
+							<a th:href="@{/board/list(page=${i},
+							searchType=${searchType}, searchKeyword=${searchKeyword})}"
 								th:text="${i}" th:classappend="${i == p.pageNum ? 'active':''}"
 							></a>
 						</span>
 						<!-- 다음 -->
-						<a th:if="${p.next}" th:href="@{/board/list(page=${p.endPage+1})}">▶</a>
+						<a th:if="${p.next}" th:href="@{/board/list(page=${p.endPage+1},
+						searchType=${searchType}, searchKeyword=${searchKeyword})}">▶</a>
 					</div>
 					<!-- 페이징 종료 화면 -->
 					<div id="search_wrap">

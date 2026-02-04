@@ -42,16 +42,16 @@
 				</table>
 				<div class="paging">
 						<!-- 이전 -->
-						<a th:if="${p.prev}" th:href="@{/board/list(page=${p.startPage-1})}">◀</a>
+						<a th:if="${ph.prev}" th:href="@{/board/boardList(page=${ph.startPage-1})}">◀</a>
 						<!-- 페이지 번호 출력 -->
 						<!-- [7][8][9] -->
-						<span th:each="i : ${#numbers.sequence(p.startPage,p.endPage)}">
-							<a th:href="@{/board/list(page=${i})}"
-								th:text="${i}" th:classappend="${i == p.pageNum ? 'active':''}"
+						<span th:each="i : ${#numbers.sequence(ph.startPage,ph.endPage)}">
+							<a th:href="@{/board/boardList(page=${i})}"
+								th:text="${i}" th:classappend="${i == ph.pageNum ? 'active':''}"
 							></a>
 						</span>
 						<!-- 다음 -->
-						<a th:if="${p.next}" th:href="@{/board/list(page=${p.endPage+1})}">▶</a>
+						<a th:if="${ph.next}" th:href="@{/board/boardList(page=${ph.endPage+1})}">▶</a>
 					</div>
 			</div>
 		</div>
