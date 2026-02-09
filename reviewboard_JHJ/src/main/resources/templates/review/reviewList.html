@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html  lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="styLesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+	<section>
+		<h2>레스토랑 리뷰</h2>
+		<div class="listbox">
+			<div class="list_title">
+				<span> 전체 평균 별점 :</span>
+				<span th:text="${star}"></span>
+			</div>
+			<div class="list">
+				<table border="1">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>별점</th>
+							<th>작성일</th>
+							<th>조회수</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="li, stat:${list}">
+							<td th:text="${li.num}"></td>
+							<td>
+								<a th:text="${li.title}" th:href="@{/review/info(num=${li.num})}"></a>
+							</td>
+							<td th:text="${li.writer}"></td>
+							<td th:text="${li.star}"></td>
+							<td th:text="${li.createdAT}"></td>
+							<td th:text="${li.viewcnt}"></td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="paging">
+					<!-- 이전 -->
+					<a th:if="${ph.prev}" th:href="@{/review/list(page=${ph.startPage-1})}">◀</a>
+					<span th:each="i : ${#numbers.sequence(ph.startPage,ph.endPage)}">
+						<a th:href="@{/review/list(page=${i})}"
+							th:text="${i}" th:classappend="${i == ph.pageNum ? 'active':''}"
+						></a>
+					</span>
+					<!-- 다음 -->
+					<a th:if="${ph.next}" th:href="@{/review/list(page=${ph.endPage+1})}">▶</a>
+				</div>
+				<div class="listBtns">
+					<a th:href="@{/review/review_form}">리뷰작성하기</a>
+				</div>
+			</div>
+			
+		</div>
+	</section>
+</body>
+</html>

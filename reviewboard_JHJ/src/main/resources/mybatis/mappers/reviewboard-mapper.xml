@@ -1,3 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewboard.mapper.ReviewBoardMapper">
+	<!-- public void insertReview(ReviewBoardDTO rdto); -->
+	<insert id="insertReview" parameterType="ReviewBoardDTO">
+		INSERT INTO review(title,content,writer,star) VALUES(#{title},#{content},#{writer},#{star})
+	</insert>
+	
+	<!-- public List<ReviewBoardDTO> getAllreview(); -->
+	<!-- <select id="getAllreview" resultType="ReviewBoardDTO">
+		SELECT * FROM review ORDER BY num DESC
+	</select> -->
+	
+	<!-- public List<ReviewBoardDTO> getOnereview(int num); -->
+	<select id="getOnereview" parameterType="int" resultType="ReviewBoardDTO">
+		SELECT * FROM review WHERE num=#{num}
+	</select>
+	
+	<!-- public void updateReadReview(int num) -->
+	<update id="updateReadReview" parameterType="int">
+		UPDATE review SET viewcnt = viewcnt+1 WHERE num=#{num}
+	</update>
+	
+	<!-- public int updateReview(ReviewBoardDTO rdto) -->
+	<update id="updateReview" parameterType="ReviewBoardDTO">
+		UPDATE review SET title=#{title},content=#{content},writer=#{writer},star=#{star} WHERE num=#{num}
+	</update>	
+	
+	<!-- public int deleteReview(int num) -->
+	<delete id="deleteReview" parameterType="int">
+		DELETE FROM review WHERE num=#{num}
+	</delete>
+	
+	<!-- public void starAvg(ReviewBoardDTO rdto) -->
+	<select id="starAvg" parameterType="ReviewBoardDTO">
+		SELECT AVG(star) FROM review
+	</select>
+	
+	<select id="getAllcount" resultType="int">
+		SELECT COUNT(*) FROM review
+	</select>
+	
+	<select id="getPagelist" resultType="ReviewBoardDTO">
+		SELECT *FROM review ORDER BY num DESC
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+</mapper>

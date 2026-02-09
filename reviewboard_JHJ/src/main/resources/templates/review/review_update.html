@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="styLesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+	<section  class="update_form">
+		<h2>리뷰 수정하기</h2>
+		<form th:action="@{/review/updatePro}" method="POST">
+			<input type="hidden" name="num" th:value="${oneReview.num}">
+			<table>
+				<tbody>
+					<tr>
+						<td>제목 :</td>
+						<td>
+							<input type="text" name="title" th:value="${oneReview.title}">
+						</td>
+					</tr>
+					<tr>
+						<td>작성자 :</td>
+						<td>
+							<input type="text" name="writer" th:value="${oneReview.writer}">
+						</td>
+					</tr>
+					<tr>
+						<td>별점 :</td>
+						<td>
+							<select name="star">
+								<option value="5">5점★★★★★</option>
+								<option value="4">4점★★★★☆</option>
+								<option value="3">3점★★★☆☆</option>
+								<option value="2">2점★★☆☆☆</option>
+								<option value="1">1점★☆☆☆☆</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>내용 :</td>
+						<td>
+							<textarea rows="10" cols="55" name="content" th:value="${oneReview.content}"></textarea>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<div style="display: inline;">
+				<button type="submit">저장하기</button>
+				<a th:href="@{/review/list}">취소</a>
+			</div>
+		</form>
+	</section>
+</body>
+</html>

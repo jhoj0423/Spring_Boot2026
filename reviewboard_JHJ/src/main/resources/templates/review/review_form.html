@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html  lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="styLesheet" th:href="@{/css/common.css}">
+</head>
+<body>
+	<section>
+		<h2>리뷰 작성</h2>
+		<form th:action="@{/review/writePro}" name="review_form" method="POST">
+			<table>
+				<tbody>
+					<tr>
+						<td>제목 :</td>
+						<td>
+							<input type="text" name="title" placeholder="리뷰 제목">
+						</td>
+					</tr>
+					<tr>
+						<td>작성자 :</td>
+						<td>
+							<input type="text" name="writer" placeholder="작성자 이름">
+						</td>
+					</tr>
+					<tr>
+						<td>별점 :</td>
+						<td>
+							<select name="star">
+								<option value="5">5점★★★★★</option>
+								<option value="4">4점★★★★☆</option>
+								<option value="3">3점★★★☆☆</option>
+								<option value="2">2점★★☆☆☆</option>
+								<option value="1">1점★☆☆☆☆</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>내용 :</td>
+						<td>
+							<textarea rows="10" cols="55" name="content" placeholder="리뷰내용을 입력해주세요"></textarea>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+			<button type="submit">저장하기</button>
+			<a th:href="@{/reveiw/list}">취소</a>
+		</form>
+	</section>
+</body>
+</html>
