@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 2026/02/10-17:40:16.782 1d8 Reusing MANIFEST C:\Spring_Boot\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Session Storage/MANIFEST-000001
 2026/02/10-17:40:16.782 1d8 Recovering log #3
 2026/02/10-17:40:16.784 1d8 Reusing old log C:\Spring_Boot\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Session Storage/000003.log 
+=======
+2026/02/09-15:15:58.088 2594 Reusing MANIFEST C:\Spring_Boot2026\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Session Storage/MANIFEST-000001
+2026/02/09-15:15:58.089 2594 Recovering log #3
+2026/02/09-15:15:58.091 2594 Reusing old log C:\Spring_Boot2026\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Session Storage/000003.log 
+>>>>>>> 6b9c0b509b713b0c554f85f86a0608bb3a547004
