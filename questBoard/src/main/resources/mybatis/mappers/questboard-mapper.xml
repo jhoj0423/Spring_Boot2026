@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="questBoard.mapper.QuestBoardMapper">
+
+	<insert id="insertQuestBoard" parameterType="QuestBoardDTO">
+		INSERT INTO questBoard(writer,email,subject,password,ref,content)
+		VALUES(#{writer},#{email},#{subject},#{password},1,#{content})
+	</insert>
+	
+	<select id="getAllQuestBoard" resultType="qDTO">
+		SELECT * FROM questBoard ORDER BY num DESC
+	</select>
+	
+	<select id="getOneQuestBoard" parameterType="int" resultType="QuestBoardDTO">
+		SELECT * FROM questBoard WHERE num=#{num}
+	</select>
+	
+	<insert id="reWriteQuestBoard" parameterType="qDTO">
+		INSERT INTO questBoard(writer,email,subject,password,ref)
+		VALUES(#{writer},#{email},#{subject},#{password},2,#{content)
+	</insert>
+	
+	<update id="readCountUpdate" parameterType="qDTO">
+		UPDATE questBoard SET readcount = readcount+1 WHERE num=#{num} 
+	</update>
+	
+	
+	<update id="updateOneBoard" parameterType="qDTO">
+		UPDATE questBoard SET subject=#{subject}, content=#{content} WHERE num=#{num}
+	</update>
+	
+	<select id="getAllcount" resultType="int">
+		SELECT COUNT(*) FROM questBoard
+	</select>
+	
+	<select id="getPagelist" resultType="qDTO">
+		SELECT *FROM questBoard ORDER BY num DESC
+		LIMIT #{startRow}, #{pageSize}
+	</select>
+	
+</mapper>
