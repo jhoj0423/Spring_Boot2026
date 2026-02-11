@@ -5,7 +5,7 @@ public class PageHandler {
 	private int totalCnt;
 	private int pageNum;
 	private int pageSize;
-	private int pageBlock;
+	private int pageBlock =3;
 	
 	private int startRow;
 	private int endRow;

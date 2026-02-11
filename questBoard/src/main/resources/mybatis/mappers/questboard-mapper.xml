@@ -4,22 +4,22 @@
 
 <mapper namespace="questBoard.mapper.QuestBoardMapper">
 
-	<insert id="insertQuestBoard" parameterType="QuestBoardDTO">
-		INSERT INTO questBoard(writer,email,subject,password,ref,content)
-		VALUES(#{writer},#{email},#{subject},#{password},1,#{content})
+	<insert id="insertQuestBoard" parameterType="qDTO">
+		INSERT INTO questBoard(writer,email,subject,password,ref,re_step,content,upload1,upload2)
+		VALUES(#{writer},#{email},#{subject},#{password},(SELECT IFNULL(MAX(r.ref)+1,1) FROM questBoard r),1,#{content},#{upload1},#{upload2})
 	</insert>
 	
 	<select id="getAllQuestBoard" resultType="qDTO">
 		SELECT * FROM questBoard ORDER BY num DESC
 	</select>
 	
-	<select id="getOneQuestBoard" parameterType="int" resultType="QuestBoardDTO">
+	<select id="getOneQuestBoard" parameterType="int" resultType="qDTO">
 		SELECT * FROM questBoard WHERE num=#{num}
 	</select>
 	
 	<insert id="reWriteQuestBoard" parameterType="qDTO">
-		INSERT INTO questBoard(writer,email,subject,password,ref)
-		VALUES(#{writer},#{email},#{subject},#{password},2,#{content)
+		INSERT INTO questBoard(writer,email,subject,password,ref,re_step,content,upload1,upload2)
+		VALUES(#{writer},#{email},#{subject},#{password},#{ref},2,#{content},#{upload1},#{upload2})
 	</insert>
 	
 	<update id="readCountUpdate" parameterType="qDTO">
@@ -36,7 +36,7 @@
 	</select>
 	
 	<select id="getPagelist" resultType="qDTO">
-		SELECT *FROM questBoard ORDER BY num DESC
+		SELECT *FROM questBoard ORDER BY ref DESC, re_step ASC
 		LIMIT #{startRow}, #{pageSize}
 	</select>
 	

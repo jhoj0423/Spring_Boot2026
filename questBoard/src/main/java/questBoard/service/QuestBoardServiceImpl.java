@@ -34,7 +34,10 @@ public class QuestBoardServiceImpl implements QuestBoardService{
 	@Override
 	public void reWriteQuestBoard(QuestBoardDTO qdto) {
 		System.out.println("QuestBoardServiceImpl reWriteQuestBoard(*@*) 메서드 확인");
-		questboardMapper.reWriteQuestBoard(qdto);
+		if(qdto.getRe_step()==1) {
+			questboardMapper.reWriteQuestBoard(qdto);
+		}
+		
 	}
 
 	@Override
@@ -52,13 +55,13 @@ public class QuestBoardServiceImpl implements QuestBoardService{
 	@Override
 	public int getAllcount() {
 		System.out.println("QuestBoardServiceImpl getAllcount(*@*) 메서드 확인");
-		return 0;
+		return questboardMapper.getAllcount();
 	}
 
 	@Override
 	public List<QuestBoardDTO> getPagelist(int startRow, int pageSize) {
 		System.out.println("QuestBoardServiceImpl getPagelist(*@*) 메서드 확인");
-		return null;
+		return questboardMapper.getPagelist(startRow, pageSize);
 	}
 	
 	

@@ -1,13 +1,22 @@
 package questBoard.dto;
 
+import java.util.Date;
+
 public class QuestBoardDTO {
 	private int num ;
 	private String writer;
 	private String email;
 	private String subject;
 	private String password;
-	private String reg_date; 
+	public int getRe_step() {
+		return re_step;
+	}
+	public void setRe_step(int re_step) {
+		this.re_step = re_step;
+	}
+	private Date reg_date; 
 	private int ref;
+	private int re_step; // 댓글 출력 순서 (위->아래)
 	private int readcount;
 	
 	
@@ -41,10 +50,10 @@ public class QuestBoardDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getReg_date() {
+	public Date getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(String reg_date) {
+	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
 	public int getRef() {
