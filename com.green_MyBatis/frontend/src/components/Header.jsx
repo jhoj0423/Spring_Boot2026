@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {AuthContext} from '../contexts/AutoContext';
+import {AuthContext} from '../contexts/AuthContext';
 import { useContext, useEffect } from 'react';
 
 import './Header.css';
@@ -26,17 +26,18 @@ export default function Header(){
             ):(
                 <>
                     <span style={{fontWeight:'bold',color:'#333'}}>
-                        {user.id === 'admin9867'? 
+                        {user === 'admin9867'? 
                         <>
                             <span>관리자</span>
                             <Link to="/member/list">[회원목록]</Link>
+                            <Link to="/cars/insert">[상품등록]</Link>
                         </>
                         :
-                        <span>{user.id}님 환영</span>}
+                        <span>{user}님 환영</span>}
                     </span>
                     {/* logout 함수 연결부분 */}
                     <Link to="/" onClick={logout}>로그아웃</Link>
-                    <Link to="/member/memberInfo">Mypage</Link>
+                    <Link to="/member/myinfo">Mypage</Link>
                     
                 </>
             )}

@@ -29,26 +29,30 @@ export default function HOME(){
         })
         
     },[])
-    return(
-        <section id="section_wrap"> 
-            <div className="word">HOME</div>
-            <div className="content">
-                <div className="carList">
-                    {carList.length>0?(
-                        carList.map((car)=>(
-                            <>
-                                <div className="carItem" key={car.no}>
-                                    <img src={`/img/car/${car.img}`} alt={car.carName} />
-                                    <div className="carName">{car.carName}</div>
-                                    <div className="carPrice">{Number(car.price).toLocaleString()}</div>
-                                </div>
-                            </>
-                        ))
-                    ):(
-                        <p>등록된 차량이 존재하지 않습니다</p>
-                    )}
+
+    if(carList.length>0){
+
+        return(
+            <section id="section_wrap"> 
+                <div className="word">HOME</div>
+                <div className="content">
+                    <div className="carList">
+                        
+                            {carList.map((car)=>(
+                                <>
+                                    <div className="carItem" key={car.no}>
+                                        <img src={`/img/car/${car.img}`} alt={car.carName} />
+                                        <div className="carName">{car.carName}</div>
+                                        <div className="carPrice">{Number(car.price).toLocaleString()}</div>
+                                    </div>
+                                </>
+                            ))}
+                        
+                    </div>
                 </div>
-            </div>
-        </section>
-    )
+            </section>
+        )
+    }
+
+
 }

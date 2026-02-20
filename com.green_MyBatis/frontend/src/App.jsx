@@ -3,10 +3,16 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import AuthProvider from './contexts/AutoContext'
+import AuthProvider from './contexts/AuthContext'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import HOME from './pages/Home'
+import Signup from './pages/Signup'
+import SignupResult from './pages/SignupResult'
+import Login from './pages/Login'
+import MyInfo from './pages/MyInfo'
+import Modify from './pages/Modify'
+import Product from './pages/Product'
 
 function App() {
   
@@ -23,6 +29,12 @@ function App() {
           <main>
             <Routes>
                 <Route path='/' element={<HOME/>}/>
+                <Route path='/member/signup' element={<Signup/>}/>
+                <Route path='/member/signup_result' element={<SignupResult/>}/>
+                <Route path='/member/login' element={<Login/>}/>
+                <Route path='/member/myinfo' element={<MyInfo/>}/>
+                <Route path='/member/modify' element={<Modify/>}/>
+                <Route path='/cars/insert' element={<Product/>}/>
             </Routes>
           </main>
           <Footer/>

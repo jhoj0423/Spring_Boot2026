@@ -1,5 +1,7 @@
 package com.green.board;
 
+
+
 public class BoardDTO {
 	// 반드시 MYSQL에ㅔ 작성한 테이블 필드명 순서, 데이터 타입이랑 같은 형식으로 사용한다.
 	private int num; // 글번호
@@ -10,6 +12,8 @@ public class BoardDTO {
 	private int readcount; // 조회수
 	private String content; // 글내용
 	private String id; // 글내용
+	
+	
 	
 	//=================== getter , setter ====================
 	public int getNum() {
